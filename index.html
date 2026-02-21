@@ -66,13 +66,15 @@
 
       <div class="pb-4 md:pb-7.5 flex gap-2">
         <button
+          onclick="toggleStyle('all-tab-btn')"
           id="all-tab-btn"
-          class="border border-[#E6E7E9] bg-white text-[#64748B] font-medium rounded-sm px-4 py-2 cursor-pointer"
+          class="border border-[#E6E7E9] bg-[#3B82F6] text-white font-medium rounded-sm px-4 py-2 cursor-pointer"
         >
           All
         </button>
 
         <button
+          onclick="toggleStyle('interview-tab-btn')"
           id="interview-tab-btn"
           class="border border-[#E6E7E9] bg-white text-[#64748B] font-medium rounded-sm px-4 py-2 cursor-pointer"
         >
@@ -80,6 +82,7 @@
         </button>
 
         <button
+          onclick="toggleStyle('rejected-tab-btn')"
           id="rejected-tab-btn"
           class="border border-[#E6E7E9] bg-white text-[#64748B] font-medium rounded-sm px-4 py-2 cursor-pointer"
         >
@@ -94,12 +97,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 Mobile First Corp
               </h3>
-              <p class="job-description text-[#64748B]">
-                React Native Developer
-              </p>
+              <p class="job-title text-[#64748B]">React Native Developer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -111,7 +112,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Build cross-platform mobile applications using React Native. Work
               on products used by millions of users worldwide.
             </p>
@@ -146,12 +147,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 WebFlow Agency
               </h3>
-              <p class="job-description text-[#64748B]">
-                Web Designer & Developer
-              </p>
+              <p class="job-title text-[#64748B]">Web Designer & Developer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -163,7 +162,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Create stunning web experiences for high-profile clients. Must
               have portfolio and experience with modern web design trends.
             </p>
@@ -198,10 +197,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 DataViz Solutions
               </h3>
-              <p class="job-description text-[#64748B]">
+              <p class="job-title text-[#64748B]">
                 Data Visualization Specialist
               </p>
             </div>
@@ -215,7 +214,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Transform complex data into compelling visualizations. Required
               skills: D3.js, React, and strong analytical thinking.
             </p>
@@ -250,10 +249,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 CloudFirst Inc
               </h3>
-              <p class="job-description text-[#64748B]">Backend Developer</p>
+              <p class="job-title text-[#64748B]">Backend Developer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -265,7 +264,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Design and maintain scalable backend systems using Python and AWS.
               Work with modern DevOps practices and cloud infrastructure.
             </p>
@@ -300,10 +299,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 Innovation Labs
               </h3>
-              <p class="job-description text-[#64748B]">UI/UX Engineer</p>
+              <p class="job-title text-[#64748B]">UI/UX Engineer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -315,7 +314,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Create beautiful and functional user interfaces for our suite of
               products. Strong design skills and frontend development expertise
               required.
@@ -351,10 +350,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 MegaCorp Solutions
               </h3>
-              <p class="job-description text-[#64748B]">JavaScript Developer</p>
+              <p class="job-title text-[#64748B]">JavaScript Developer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -366,7 +365,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Build enterprise applications with JavaScript and modern
               frameworks. We offer competitive compensation, health insurance,
               and professional development opportunities.
@@ -402,10 +401,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 StartupXYZ
               </h3>
-              <p class="job-description text-[#64748B]">Full Stack Engineer</p>
+              <p class="job-title text-[#64748B]">Full Stack Engineer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -417,7 +416,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               Join our fast-growing startup and work on our core platform.
               Experience with Node.js and React required. Great benefits and
               equity package included.
@@ -453,12 +452,10 @@
         >
           <div class="card space-y-4">
             <div>
-              <h3 class="job-title text-[#002C5C] text-[18px] font-semibold">
+              <h3 class="job-name text-[#002C5C] text-[18px] font-semibold">
                 TechCorp Industries
               </h3>
-              <p class="job-description text-[#64748B]">
-                Senior Frontend Developer
-              </p>
+              <p class="job-title text-[#64748B]">Senior Frontend Developer</p>
             </div>
 
             <p class="job-salary text-[#64748B]">
@@ -470,7 +467,7 @@
             >
               NOT APPLIED
             </button>
-            <p class="details text-[#64748B]">
+            <p class="job-details text-[#64748B]">
               We are looking for an experienced Frontend Developer to build
               scalable web applications using React and TypeScript. You will
               work with a talented team on cutting-edge projects.
@@ -500,6 +497,9 @@
           </div>
         </div>
       </section>
+
+      <!-- show display -->
+      <section id="show-display"></section>
     </main>
 
     <!-- js connect -->
