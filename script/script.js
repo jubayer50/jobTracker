@@ -13,16 +13,27 @@ let rejectedTabBtn = document.getElementById("rejected-tab-btn");
 
 // get the parent of cards
 let cardParent = document.getElementById("jobs-section");
+// get the show display section
+const showDisplay = document.getElementById("show-display");
+
+// get the total jobs
+let totalJob = document.getElementById("total-job");
+console.log(totalJob);
 
 function calculateCount() {
   totalCount.innerText = cardParent.children.length;
   interviewCount.innerText = interviewList.length;
   rejectedCount.innerText = rejectedList.length;
+
+  // show total job
+  totalJob.innerText = cardParent.children.length;
 }
 
 // call the function calculate
 calculateCount();
 
+//take a variable  to remember the tab
+let presentTab = "";
 // all tab button toggle style
 function toggleStyle(id) {
   // add all button bg white and text blue
@@ -38,121 +49,156 @@ function toggleStyle(id) {
   // dynamically add bg color blue and test white
   document.getElementById(id).classList.remove("bg-white", "text-[#64748B]");
   document.getElementById(id).classList.add("bg-[#3B82F6]", "text-white");
+
+  // update parentTab
+  presentTab = id;
+  if (id == "interview-tab-btn") {
+    showDisplay.classList.remove("hidden");
+    cardParent.classList.add("hidden");
+    showDisplayInterview();
+  } else if (id == "all-tab-btn") {
+    showDisplay.classList.add("hidden");
+    cardParent.classList.remove("hidden");
+  } else if (id == "rejected-tab-btn") {
+    showDisplay.classList.remove("hidden");
+    cardParent.classList.add("hidden");
+    showDisplayRejected();
+  }
+
+  // show tab way jobs
+  if (id == "interview-tab-btn") {
+    document.getElementById("tab-total-jobs").innerText = interviewList.length;
+    document.getElementById("tab-total-jobs").classList.remove("hidden");
+  } else if (id == "all-tab-btn") {
+    document.getElementById("tab-total-jobs").classList.add("hidden");
+  } else if (id == "rejected-tab-btn") {
+    document.getElementById("tab-total-jobs").innerText = rejectedList.length;
+    document.getElementById("tab-total-jobs").classList.remove("hidden");
+  }
 }
 
 // add event listener add on two button by delegated
-document
-  .getElementById("jobs-section")
-  .addEventListener("click", function (event) {
-    if (event.target.classList.contains("btn-interview")) {
-      let btnParent = event.target.parentNode.parentNode;
+document.querySelector("main").addEventListener("click", function (event) {
+  if (event.target.classList.contains("btn-interview")) {
+    let btnParent = event.target.parentNode.parentNode;
 
-      // get the detail of card
-      let jobName = btnParent.querySelector(".job-name").innerText;
-      let jobTitle = btnParent.querySelector(".job-title").innerText;
-      let jobSalary = btnParent.querySelector(".job-salary").innerText;
-      let status = btnParent.querySelector(".status").innerText;
-      let jobDetails = btnParent.querySelector(".job-details").innerText;
+    // get the detail of card
+    let jobName = btnParent.querySelector(".job-name").innerText;
+    let jobTitle = btnParent.querySelector(".job-title").innerText;
+    let jobSalary = btnParent.querySelector(".job-salary").innerText;
+    let status = btnParent.querySelector(".status").innerText;
+    let jobDetails = btnParent.querySelector(".job-details").innerText;
+    let btnInterview = btnParent.querySelector(".btn-interview").innerText;
+    let btnRejected = btnParent.querySelector(".btn-rejected").innerText;
 
-      // status style
-      btnParent.querySelector(".status").innerText = "INTERVIEW";
+    // status style
+    btnParent.querySelector(".status").innerText = "INTERVIEW";
 
-      btnParent
-        .querySelector(".status")
-        .classList.add("bg-[#10B98130]", "rounded-sm", "text-[#10B981]");
-      btnParent.querySelector(".status").classList.remove("bg-[#EEF4FF]");
+    btnParent
+      .querySelector(".status")
+      .classList.add("bg-[#10B98130]", "rounded-sm", "text-[#10B981]");
+    btnParent.querySelector(".status").classList.remove("bg-[#EEF4FF]");
 
-      btnParent
-        .querySelector(".status")
-        .classList.remove("bg-[#EF444430]", "text-[#EF4444]");
+    btnParent
+      .querySelector(".status")
+      .classList.remove("bg-[#EF444430]", "text-[#EF4444]");
 
-      // make object with card details
-      const jobInfo = {
-        jobName,
-        jobTitle,
-        jobSalary,
-        status: "INTERVIEW",
-        jobDetails,
-      };
+    // make object with card details
+    const jobInfo = {
+      jobName,
+      jobTitle,
+      jobSalary,
+      status: "INTERVIEW",
+      jobDetails,
+      btnInterview,
+      btnRejected,
+    };
 
-      // check array
-      let isExist = false;
+    // check array
+    let isExist = false;
 
-      for (let item of interviewList) {
-        if (item.jobName == jobInfo.jobName) {
-          isExist = true;
-          break;
-        }
+    for (let item of interviewList) {
+      if (item.jobName == jobInfo.jobName) {
+        isExist = true;
+        break;
       }
+    }
 
-      // push in interviewList array
-      if (!isExist) {
-        interviewList.push(jobInfo);
-      }
+    // push in interviewList array
+    if (!isExist) {
+      interviewList.push(jobInfo);
+    }
 
-      // remove from rejectedList if same job both array by filter
-      rejectedList = rejectedList.filter(
-        (item) => item.jobName != jobInfo.jobName,
-      );
+    // remove from rejectedList if same job both array by filter
+    rejectedList = rejectedList.filter(
+      (item) => item.jobName != jobInfo.jobName,
+    );
 
-      calculateCount();
-
-      showDisplayInterview();
-    } else if (event.target.classList.contains("btn-rejected")) {
-      let btnParent = event.target.parentNode.parentNode;
-
-      // get the detail of card
-      let jobName = btnParent.querySelector(".job-name").innerText;
-      let jobTitle = btnParent.querySelector(".job-title").innerText;
-      let jobSalary = btnParent.querySelector(".job-salary").innerText;
-      let status = btnParent.querySelector(".status").innerText;
-      let jobDetails = btnParent.querySelector(".job-details").innerText;
-
-      btnParent.querySelector(".status").innerText = "REJECTED";
-      btnParent
-        .querySelector(".status")
-        .classList.remove("bg-[#10B98130]", "text-[#10B981]");
-      btnParent
-        .querySelector(".status")
-        .classList.add("bg-[#EF444430]", "rounded-sm", "text-[#EF4444]");
-
-      // make object with details
-      const jobInfo = {
-        jobName,
-        jobTitle,
-        jobSalary,
-        status: "REJECTED",
-        jobDetails,
-      };
-
-      // check rejectedList array
-      let isExist = false;
-      for (let rejected of rejectedList) {
-        if (rejected.jobName == jobInfo.jobName) {
-          isExist = true;
-          break;
-        }
-      }
-
-      // push rejectedList array
-      if (!isExist) {
-        rejectedList.push(jobInfo);
-      }
-
-      // remove from interviewList array if same job both array by filter
-      interviewList = interviewList.filter(
-        (item) => item.jobName != jobInfo.jobName,
-      );
-
-      // call the calculateCount function
-      calculateCount();
-
+    if (presentTab == "rejected-tab-btn") {
       showDisplayRejected();
     }
-  });
 
-// get the show display section
-const showDisplay = document.getElementById("show-display");
+    calculateCount();
+  } else if (event.target.classList.contains("btn-rejected")) {
+    let btnParent = event.target.parentNode.parentNode;
+
+    // get the detail of card
+    let jobName = btnParent.querySelector(".job-name").innerText;
+    let jobTitle = btnParent.querySelector(".job-title").innerText;
+    let jobSalary = btnParent.querySelector(".job-salary").innerText;
+    let status = btnParent.querySelector(".status").innerText;
+    let jobDetails = btnParent.querySelector(".job-details").innerText;
+    let btnInterview = btnParent.querySelector(".btn-interview").innerText;
+    let btnRejected = btnParent.querySelector(".btn-rejected").innerText;
+    console.log(btnInterview);
+    console.log(btnRejected);
+
+    btnParent.querySelector(".status").innerText = "REJECTED";
+    btnParent
+      .querySelector(".status")
+      .classList.remove("bg-[#10B98130]", "text-[#10B981]");
+    btnParent
+      .querySelector(".status")
+      .classList.add("bg-[#EF444430]", "rounded-sm", "text-[#EF4444]");
+
+    // make object with details
+    const jobInfo = {
+      jobName,
+      jobTitle,
+      jobSalary,
+      status: "REJECTED",
+      jobDetails,
+      btnInterview,
+      btnRejected,
+    };
+    console.log(jobInfo);
+
+    // check rejectedList array
+    let isExist = false;
+    for (let rejected of rejectedList) {
+      if (rejected.jobName == jobInfo.jobName) {
+        isExist = true;
+        break;
+      }
+    }
+
+    // push rejectedList array
+    if (!isExist) {
+      rejectedList.push(jobInfo);
+    }
+
+    // remove from interviewList array if same job both array by filter
+    interviewList = interviewList.filter(
+      (item) => item.jobName != jobInfo.jobName,
+    );
+
+    if (presentTab == "interview-tab-btn") {
+      showDisplayInterview();
+    }
+    // call the calculateCount function
+    calculateCount();
+  }
+});
 
 // show display function for interview
 function showDisplayInterview() {
@@ -203,12 +249,12 @@ function showDisplayInterview() {
               <button
                 class="btn-interview px-3 py-2 font-semibold rounded-sm border-2 border-[#10B981] text-[#10B981] cursor-pointer"
               >
-                INTERVIEW
+                ${interview.btnInterview}
               </button>
               <button
                 class="btn-rejected px-3 py-2 font-semibold rounded-sm border-2 border-[#EF4444] text-[#EF4444] cursor-pointer"
               >
-                REJECTED
+                ${interview.btnRejected}
               </button>
             </div>
           </div>
@@ -276,12 +322,12 @@ function showDisplayRejected() {
               <button
                 class="btn-interview px-3 py-2 font-semibold rounded-sm border-2 border-[#10B981] text-[#10B981] cursor-pointer"
               >
-                INTERVIEW
+                ${rejected.btnInterview}
               </button>
               <button
                 class="btn-rejected px-3 py-2 font-semibold rounded-sm border-2 border-[#EF4444] text-[#EF4444] cursor-pointer"
               >
-                REJECTED
+                ${rejected.btnRejected}
               </button>
             </div>
           </div>

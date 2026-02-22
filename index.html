@@ -61,7 +61,10 @@
     <main class="mt-4 md:mt-7.5">
       <div class="mb-2.5 md:mb-6 flex justify-between">
         <h2 class="text-[#002C5C] text-[20px] font-bold">Available Jobs</h2>
-        <p class="font-medium text-[#64748B]">jobs</p>
+        <p class="font-medium text-[#64748B]">
+          <span id="tab-total-jobs" class="hidden">0</span> Jobs
+          <span id="total-job">0</span>
+        </p>
       </div>
 
       <div class="pb-4 md:pb-7.5 flex gap-2">
@@ -491,7 +494,7 @@
       </section>
 
       <!-- show display -->
-      <section id="show-display"></section>
+      <section id="show-display" class="hidden"></section>
     </main>
 
     <!-- js connect -->
