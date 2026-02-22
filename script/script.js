@@ -54,6 +54,18 @@ document
       let status = btnParent.querySelector(".status").innerText;
       let jobDetails = btnParent.querySelector(".job-details").innerText;
 
+      // status style
+      btnParent.querySelector(".status").innerText = "INTERVIEW";
+
+      btnParent
+        .querySelector(".status")
+        .classList.add("bg-[#10B98130]", "rounded-sm", "text-[#10B981]");
+      btnParent.querySelector(".status").classList.remove("bg-[#EEF4FF]");
+
+      btnParent
+        .querySelector(".status")
+        .classList.remove("bg-[#EF444430]", "text-[#EF4444]");
+
       // make object with card details
       const jobInfo = {
         jobName,
@@ -78,6 +90,11 @@ document
         interviewList.push(jobInfo);
       }
 
+      // remove from rejectedList if same job both array by filter
+      rejectedList = rejectedList.filter(
+        (item) => item.jobName != jobInfo.jobName,
+      );
+
       calculateCount();
 
       showDisplayInterview();
@@ -90,6 +107,14 @@ document
       let jobSalary = btnParent.querySelector(".job-salary").innerText;
       let status = btnParent.querySelector(".status").innerText;
       let jobDetails = btnParent.querySelector(".job-details").innerText;
+
+      btnParent.querySelector(".status").innerText = "REJECTED";
+      btnParent
+        .querySelector(".status")
+        .classList.remove("bg-[#10B98130]", "text-[#10B981]");
+      btnParent
+        .querySelector(".status")
+        .classList.add("bg-[#EF444430]", "rounded-sm", "text-[#EF4444]");
 
       // make object with details
       const jobInfo = {
@@ -114,6 +139,11 @@ document
         rejectedList.push(jobInfo);
       }
 
+      // remove from interviewList array if same job both array by filter
+      interviewList = interviewList.filter(
+        (item) => item.jobName != jobInfo.jobName,
+      );
+
       // call the calculateCount function
       calculateCount();
 
@@ -127,6 +157,19 @@ const showDisplay = document.getElementById("show-display");
 // show display function for interview
 function showDisplayInterview() {
   showDisplay.innerHTML = "";
+
+  // if there is no jobs in interviewList array
+  if (interviewList.length == 0) {
+    showDisplay.innerHTML = `
+    <div class="bg-white py-8 sm:py-15 text-center">
+        <img class="mx-auto" src="./jobs.png" alt="" />
+        <h3 class="text-[#002C5C] text-[24px] font-semibold">
+          No jobs available
+        </h3>
+        <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+      </div>
+    `;
+  }
 
   // create element
   for (let interview of interviewList) {
@@ -148,7 +191,7 @@ function showDisplayInterview() {
             </p>
 
             <button
-              class="status bg-[#10B98130] text-[#10B981] font-medium px-3 py-2"
+              class="status bg-[#10B98130] text-[#10B981] rounded-sm font-medium px-3 py-2"
             >
               ${interview.status}
             </button>
@@ -189,6 +232,19 @@ function showDisplayInterview() {
 function showDisplayRejected() {
   showDisplay.innerHTML = "";
 
+  // if there is no jobs in rejectedList array
+  if (rejectedList.length == 0) {
+    showDisplay.innerHTML = `
+    <div class="bg-white py-8 sm:py-15 text-center">
+        <img class="mx-auto" src="./jobs.png" alt="" />
+        <h3 class="text-[#002C5C] text-[24px] font-semibold">
+          No jobs available
+        </h3>
+        <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+      </div>
+    `;
+  }
+
   for (let rejected of rejectedList) {
     let div = document.createElement("div");
     div.className =
@@ -208,7 +264,7 @@ function showDisplayRejected() {
             </p>
 
             <button
-              class="status bg-[#EF444430] text-[#EF4444] font-medium px-3 py-2"
+              class="status bg-[#EF444430] text-[#EF4444] rounded-sm font-medium px-3 py-2"
             >
               ${rejected.status}
             </button>
@@ -243,4 +299,17 @@ function showDisplayRejected() {
     // append div to the parent show display
     showDisplay.appendChild(div);
   }
+}
+
+// remove when click on buttons of delete
+let deletes = document.getElementsByClassName("delete-btn");
+// console.log(deletes);
+for (let deleteBtn of deletes) {
+  deleteBtn.addEventListener("click", function (event) {
+    // console.log(event.target.parentNode.parentNode.parentNode.parentNode);
+    event.target.parentNode.parentNode.parentNode.parentNode.removeChild(
+      event.target.parentNode.parentNode.parentNode,
+    );
+    calculateCount();
+  });
 }
