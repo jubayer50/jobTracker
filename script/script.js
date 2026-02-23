@@ -208,7 +208,7 @@ function showDisplayInterview() {
   if (interviewList.length == 0) {
     showDisplay.innerHTML = `
     <div class="bg-white py-8 sm:py-15 text-center">
-        <img class="mx-auto" src="./jobs.png" alt="" />
+        <img class="mx-auto" src="./no-job.png" alt="" />
         <h3 class="text-[#002C5C] text-[24px] font-semibold">
           No jobs available
         </h3>
