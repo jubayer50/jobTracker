@@ -12,7 +12,7 @@ In an HTML file sometime there are many class names in a tag. We can get these c
  We also get the first element of HTML by querySelector.  We can select via querySelector an element of an HTML file by class name and id name. 
 
 querySelectorAll:
-uerySelectorAll also works as a getElementByClassName, but it provides a nodeList that also looks like an array.
+uerySelectorAll also works as a getElementByClassName, but it provides a nodeList that also looks like an array.we can get element by class name and id together if need like: How we select in CSS sometime. 
 
 
 
